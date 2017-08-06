@@ -1,9 +1,12 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
+import { connect } from 'react-redux'
+import * as types from './reducer-types.js'
 
 class App extends Component {
   render() {
+    console.log(this.props.todos)
     return (
       <div className="App">
         <div className="App-header">
@@ -18,4 +21,22 @@ class App extends Component {
   }
 }
 
-export default App;
+const  mapStatetoProps = (state) => {
+  return {
+    todos: state.todos
+  }
+}
+const mapDispatchtoProps = (dispatch) => {
+  return {
+    addTodo: (todo) => {
+      dispatch({
+        type: types.ADD_NEW_TODO,
+        payload: todo
+      })
+    }
+  }
+}
+
+
+
+export default connect(mapStatetoProps,mapDispatchtoProps)(App);
