@@ -9,27 +9,20 @@ const initialState = [{content: 'Analyze requirement', isCompleted: true},
 const todoReducer = (state = initialState, action) => {
   switch (action.type) {
     case types.ADD_NEW_TODO :
-      state.push(action.payload)
-      let newStateAfterAdd = state.map(s => s)
+      let newStateAfterAdd = state.slice()
+      newStateAfterAdd.splice(state.index, 0, action.payload)
       return newStateAfterAdd
     case types.TOGGLE_STATUS:
-      let todo = action.payload
-      todo.isCompleted = !todo.isCompleted
-      let newStateAfterToggle = state.map(s => s)
-      return newStateAfterToggle
-    case types.DELETE_TODO:
-      let deleteTodo = action.payload
-      state.splice(state.indexOf(deleteTodo), 1)
-      let newStateAfterDelete = state.map(s => s)
-      return newStateAfterDelete
-    case types.CLEAR_COMPLETED_LIST:
-      state.forEach(todo => {
-        if (todo.isCompleted === true) {
-          state.splice(state.indexOf(todo), 1)
+      return state.map(e => {
+        if (e === action.payload) {
+          e.isCompleted = !e.isCompleted
         }
+        return e
       })
-      let newStateAfterClear = state.map(s => s)
-      return newStateAfterClear
+    case types.DELETE_TODO:
+      return state.filter((item, index) => item !== action.payload)
+    case types.CLEAR_COMPLETED_LIST:
+      return state.filter((item, index) => item.isCompleted !== true)
     default:
       return state
   }
