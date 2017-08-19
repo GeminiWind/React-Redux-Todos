@@ -1,4 +1,4 @@
-import { Component } from 'react'
+import React from 'react'
 import { connect } from 'react-redux'
 import * as types from '../reducer-types'
 import 'bootstrap/dist/css/bootstrap.css'
@@ -7,7 +7,7 @@ import 'font-awesome/css/font-awesome.css'
 global.jQuery = global.$ = require('jquery')
 require('bootstrap')
 
-class Todo extends Component {
+class Todo extends React.Component {
   constructor (props) {
     super(props)
     this.add = this.add.bind(this)
@@ -31,7 +31,7 @@ class Todo extends Component {
     return (
         <div className="container-fluid">
             <h1 style={{ textAlign: 'center' }}><strong>todos</strong></h1>
-            <input className="form-control" onChange={this.handleInputChange} onKeyPress={this.add} />
+            <input className="form-control" onChange={this.handleInputChange} onKeyPress={this.add}/>
             <h3><i>uncompleted </i><span>({remain.length})</span></h3>
             <ul className="list-group">
                 { remain.map((r, i) => (
@@ -98,4 +98,5 @@ const mapDispatchtoProps = (dispatch) => {
     }
   }
 }
+
 export default connect(mapStatetoProps, mapDispatchtoProps)(Todo)
