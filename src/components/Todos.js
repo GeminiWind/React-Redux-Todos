@@ -1,6 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import * as types from '../reducer-types'
+import * as todoAction from '../store/actions/todoActions'
 import 'bootstrap/dist/css/bootstrap.css'
 import 'font-awesome/css/font-awesome.css'
 
@@ -73,29 +73,10 @@ const mapStatetoProps = (state) => {
 }
 const mapDispatchtoProps = (dispatch) => {
   return {
-    addTodo: (todo) => {
-      dispatch({
-        type: types.ADD_NEW_TODO,
-        payload: todo
-      })
-    },
-    toggle: (todo) => {
-      dispatch({
-        type: types.TOGGLE_STATUS,
-        payload: todo
-      })
-    },
-    deleteRemain: (todo) => {
-      dispatch({
-        type: types.DELETE_TODO,
-        payload: todo
-      })
-    },
-    deleteComplete: () => {
-      dispatch({
-        type: types.CLEAR_COMPLETED_LIST
-      })
-    }
+    addTodo: (todo) => dispatch(todoAction.addTodo(todo)),
+    toggle: (todo) => dispatch(todoAction.toggleStatusTodo(todo)),
+    deleteRemain: (todo) => dispatch(todoAction.deleteTodo(todo)),
+    deleteComplete: () => dispatch(todoAction.clearCompleted())
   }
 }
 
