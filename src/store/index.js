@@ -1,8 +1,8 @@
-import { createStore, combineReducers, applyMiddleware } from 'redux'
-import logger from 'redux-logger'
+import { createStore, combineReducers, applyMiddleware } from 'redux';
+import logger from 'redux-logger';
 import thunk from 'redux-thunk';
-import todoReducer from './reducers/todoReducer.js'
+import todoReducer from './reducers/todoReducer.js';
 
-const store = createStore(combineReducers({todos: todoReducer}),applyMiddleware(logger, thunk))
+const store = createStore(combineReducers({todos: todoReducer}), applyMiddleware(logger, thunk));
 
-export default store
+export default store;
